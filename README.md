@@ -24,7 +24,7 @@ Directory structure
     * **conductingCylinder:**
     * **planarLayer:**
 
-The validation cases are described in more detail in the paper mentioned above, and were inspired from the work by López-Herrera et al. [2]
+The validation cases are described in more detail in the paper mentioned above, and were inspired from the work by López-Herrera et al. [2]. Most cases come with Matlab/Python scripts that use the computed solution and compare against analytical solution.
 
 References
 ----------
