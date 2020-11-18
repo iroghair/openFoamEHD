@@ -1,5 +1,3 @@
-# openFoamEHD
-
 Electrohydrodynamic models based on OpenFOAM
 ============================================
 
@@ -21,13 +19,15 @@ Directory structure
     * **interFoamEHDMR:** Multiphase electrohydrodynamic solver with multi-region, coupling the electric potential solution across fluid and solid domains
   * Utilities
     * **multiRegionSetFields:** A setFields application specifically for multi-region simulations. The source was obtained from user karlvirgil on cfd-online forums:  http://www.cfd-online.com/Forums/openfoam/105491-how-use-setfields-multiregionsolver.html
-  * Validation: validation cases are described in the paper mentioned above, inspired from the work by Lopez-Herrera et al. [2]
+  * Validation: 
     * **chargeBumpRelaxation:** 
     * **conductingCylinder:**
     * **planarLayer:**
 
+The validation cases are described in more detail in the paper mentioned above, and were inspired from the work by López-Herrera et al. [2]
+
 References
 ----------
+[1] [Roghair, Musterd, Van den Ende, Kleijn, Kreutzer and Mugele: A numerical technique to simulate display pixels based on electrowetting. Microfluidics and Nanofluidics, 2015, DOI 10.1007/s10404-015-1581-5](https://link.springer.com/article/10.1007/s10404-015-1581-5)
 
-[1] Roghair, Musterd, Van den Ende, Kleijn, Kreutzer and Mugele: A numerical technique to simulate display pixels based on electrowetting. Microfluidics and Nanofluidics, 2015, DOI 10.1007/s10404-015-1581-5
-[2] López-Herrera, Popinet and Herrada: A charge-conservative approach for simulating electrohydrodynamic two-phase flows using Volume-Of-Fluid. J. Comp. Phys. 230(5), 2011. DOI: 10.1016/j.jcp.2010.11.042
+[2] [López-Herrera, Popinet and Herrada: A charge-conservative approach for simulating electrohydrodynamic two-phase flows using Volume-Of-Fluid. J. Comp. Phys. 230(5), 2011. DOI: 10.1016/j.jcp.2010.11.042](https://doi.org/10.1016/j.jcp.2010.11.042)
