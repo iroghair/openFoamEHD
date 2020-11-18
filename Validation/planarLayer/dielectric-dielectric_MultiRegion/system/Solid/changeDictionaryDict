@@ -1,0 +1,65 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dictionaryReplacement
+{
+    boundary
+    {
+        leftAndRight
+        {
+            type            patch;
+        }
+        downWall
+        {
+            type            patch;
+        }
+        frontAndBack
+        {
+            type            empty;
+        }
+    }
+
+    Ue
+    {
+        internalField   uniform 0;
+
+        boundaryField
+        {
+            ".*"
+            {
+                type            zeroGradient;
+            }
+            frontAndBack
+            {
+                type            empty;
+            }
+            downWall
+            {
+                type            fixedValue;
+                value           uniform 0;
+            }
+            "Solid_to_.*"
+            {
+                type                solidWallMixedTemperatureCoupled;
+                value               uniform 0;
+                neighbourFieldName  Ue;
+                K                   eps;
+            }
+        }
+    }
+}
+
+// ************************************************************************* //

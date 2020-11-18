@@ -1,0 +1,27 @@
+#!/bin/bash
+
+for i in 8 16 32 64 128 256 512 1024 2048;
+do
+  echo "Running blockMesh for meshsize $i..."
+  m4 -DYRES=$i constant/polyMesh/blockMeshDict.m4 > constant/polyMesh/blockMeshDict
+  blockMesh &> log.blockMesh$i
+
+  # Initialisation
+  echo "Initialising simulation..."
+  rm -r 0
+  cp -r 0.org 0
+  setFields &> log.setFields$i
+
+  # Run simulation
+  echo "Running interFoamEHD..."
+  interFoamEHD | tee log.interFoamEHD$i |grep 'Time ='
+  # Post processing. Use python script to plot
+  echo "Postprocessing..."
+  foamCalc magGrad Ue &> log.foamCalc$i
+  sample &> log.sample$i
+  #  python verifyDielectricConductive.py
+  cp sets/1e-07/lineY_Ue_alpha1_magGradUe_p_rgh.xy sample_1_$i.log
+  cp sets/2e-07/lineY_Ue_alpha1_magGradUe_p_rgh.xy sample_2_$i.log
+  cp sets/3e-07/lineY_Ue_alpha1_magGradUe_p_rgh.xy sample_3_$i.log
+done;
+

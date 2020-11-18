@@ -1,0 +1,36 @@
+#!/bin/bash
+
+for i in 32 64 128 256 512 #1024 2048; 
+do
+  echo "Running blockMesh for meshsize $i..."
+  m4 -DRES=$i constant/polyMesh/blockMeshDict.m4 > constant/polyMesh/blockMeshDict
+  blockMesh &> log.blockMesh$i
+
+  # Initialisation
+  echo "Initialising simulation..."
+  rm -r 0
+  cp -r 0.org 0
+  pyFoamClearCase.py .
+  which funkySetFields &> /dev/null
+  if [ $? -eq 1 ]; then
+    echo >&2 "funkySetFields executable not found, exiting..."
+    exit 1
+  else
+    echo "Running funkySetFields..."
+    funkySetFields -time 0  &> log.funkySetFields$i
+  fi
+
+  # Run simulation
+  echo "Running interFoamEHD..."
+  interFoamEHD | tee log.interFoamEHD$i |grep 'Time ='
+  # Post processing. Use python script to plot
+  echo "Postprocessing..."
+  foamCalc magGrad Ue &> log.foamCalc$i
+  sample -time '0,1,2,3,4,5,6' &> log.sample$i
+  #  python verifyDielectricConductive.py
+  cp sets/0/rhoE_lineX_rhoE.xy sample_0_$i.log
+  cp sets/2/rhoE_lineX_rhoE.xy sample_2_$i.log
+  cp sets/4/rhoE_lineX_rhoE.xy sample_4_$i.log
+  cp sets/6/rhoE_lineX_rhoE.xy sample_6_$i.log
+done;
+  

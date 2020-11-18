@@ -1,0 +1,8 @@
+#!/bin/bash
+
+./makeClean
+./makeRegions
+interFoamEHDMR
+
+sample -region Fluid
+sample -region Solid

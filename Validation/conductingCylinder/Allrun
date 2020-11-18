@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Run blockMesh
+echo "Running blockMesh..."
+blockMesh &> log.blockMesh
+
+# Locally refine mesh
+echo "Refining mesh..."
+topoSet -dict system/topoSetDict.1 &> log.topoSet.1
+cp system/refineMeshDict.1 system/refineMeshDict
+refineMesh -dict -overwrite &> log.refineMesh.1
+topoSet -dict system/topoSetDict.2 &> log.topoSet.2
+cp system/refineMeshDict.2 system/refineMeshDict
+refineMesh -dict -overwrite &> log.refineMesh.2
+topoSet -dict system/topoSetDict.3 &> log.topoSet.3
+cp system/refineMeshDict.3 system/refineMeshDict
+refineMesh -dict -overwrite &> log.refineMesh.3
+topoSet -dict system/topoSetDict.4 &> log.topoSet.4
+cp system/refineMeshDict.4 system/refineMeshDict
+refineMesh -dict -overwrite &> log.refineMesh.4
+
+# Initialisation
+echo "Initialising simulation..."
+setFields &> log.setFields
+
+# Run simulation
+echo "Running interFoamEHD..."
+interFoamEHD | tee log.interFoamEHD |grep 'Time ='
+
+# Post processing. Use python script to plot
+echo "Postprocessing..."
+foamCalc magGrad Ue &> log.foamCalc
+sample &> log.sample
+python verifyConductingCylinder.py 
+
+
+
+

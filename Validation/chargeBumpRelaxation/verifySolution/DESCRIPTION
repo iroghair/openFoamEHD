@@ -1,0 +1,6 @@
+DESCRIPTION:
+This case computes the relaxation of a charge bump in a conductive liquid using interFoamEHD. The results is compared with the analytical solution. The Allrun script automatically runs a python script for the comparison, but a matlab script is also provided.
+
+REQUIREMENTS:
+interFoamEHD, funkySetFields, python and some extensions, optional Matlab.
+

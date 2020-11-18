@@ -1,0 +1,33 @@
+#!/bin/sh
+cd ${0%/*} || exit 1    # run from this directory
+
+echo "Clean up the initial directories"
+for i in Fluid Solid
+do
+    # Clean up initial fields for each region
+    rm -rf 0/$i/
+    # Clean up polyMesh directory for each region
+    rm -rf constant/$i/polyMesh/
+done
+
+echo "Clean up log files"
+rm -f log.*
+echo "Clean up blockMesh files"
+rm -f  constant/polyMesh/boundary
+rm -f  constant/polyMesh/cellZones
+rm -f  constant/polyMesh/faces
+rm -f  constant/polyMesh/neighbour
+rm -f  constant/polyMesh/owner
+rm -f  constant/polyMesh/points
+echo "Clean up sets"
+rm -rf constant/polyMesh/sets
+echo "Clean up cellToRegion"
+rm -f  constant/cellToRegion
+rm -f  0/cellToRegion
+echo "Clean up VTK directory"
+rm -rf VTK/
+echo "Cleaning up .OpenFOAM files"
+rm -f *.OpenFOAM
+echo "Cleaning up time directories"
+rm -r 0.05 0.1 0.15 0.2 sets
+

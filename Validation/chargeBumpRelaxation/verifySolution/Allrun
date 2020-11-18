@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Run blockMesh and initialise charge field with funkySetFields (use
+# swak4foam to make this work!). If swak4foam is not present, in your
+# system, use prepared 0/rhoE.init file (rename it to 0/rhoE). This
+# has been automated below, but now you cannot change the blockMesh
+# files because it has been prepared using a specific number of cells
+echo "Running blockMesh..."
+blockMesh > log.blockMesh
+which funkySetFields &> /dev/null
+if [ $? -eq 1 ]; then
+    echo >&2 "funkySetFields executable not found, using the prepared file..."
+    cp 0/rhoE.init 0/rhoE
+else
+    echo "Running funkySetFields..."
+    funkySetFields -time 0  &> log.funkySetFields
+fi
+
+# Run the interFoamEHD executable
+echo "Running interFoamEHD..."
+interFoamEHD | tee log.interFoamEHD |grep 'Time ='
+
+# Post processing and verification
+echo "Running sample and python script..."
+sample > log.sample
+python verifyChargeBump.py
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+
+    root            "/home/ivo/workspace/EHDFoam-dev-tests/chargeBumpRelaxation";
+    case            "chargeBumpRelaxation";
+    instance        "system";
+    local           "";
+
+    class           dictionary;
+    object          funkySetFieldsDict;
+}
+
+expressions
+(
+	pressureWater
+	{
+	  field rhoE;
+	  create false;
+	  variables (
+	   "r2=(pos().x*pos().x + pos().y*pos().y);" 
+	   "a=0.05;"	    
+    );
+	  expression "exp(-(r2/(2*a*a))) / (a*sqrt(2*pi))"; 
+	}
+ );
+ 

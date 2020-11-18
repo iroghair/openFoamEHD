@@ -1,0 +1,7 @@
+DESCRIPTION:
+These files use the interFoamEHD solver to simulate a charge bump relaxation at different resolutions. The results (charge) are sampled over a line and compared to the analytical solution. Use the Allrun script to perform the simulations and do the sampling using OpenFOAM tools, then use the meshDependency.m in Matlab to plot the error norms for different mesh sizes.
+
+I have included the original sample_A_B.log, where A is the time and B is the resolution in one direction, so that the matlab script can be run right away. These files can be removed, but then the Allrun script has to be run (and this takes a while for the 512 case).
+
+REQUIREMENTS:
+Obviously you need interFoamEHD solver, also you will need Matlab and funkySetFields (i.e. swak4foam).

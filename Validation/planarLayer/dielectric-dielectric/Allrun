@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Running blockMesh..."
+blockMesh &> log.blockMesh
+
+# Initialisation
+echo "Initialising simulation..."
+setFields &> log.setFields
+
+
+# Run simulation
+echo "Running interFoamEHD..."
+interFoamEHD | tee log.interFoamEHD |grep 'Time ='
+
+# Post processing. Use python script to plot
+echo "Postprocessing..."
+foamCalc magGrad Ue &> log.foamCalc
+sample &> log.sample
+python verifyDielectricDielectric.py

@@ -1,0 +1,6 @@
+DESCRIPTION:
+These simulations are for checking the correct implementation of Gauss's Law. Three cases for interFoamEHD are set up (conductive-conductive, dielectric-conductive and dielectric-dielectric). Another case is for checking the multiRegion approach.
+
+All simulations contain several run scripts that guide a bit, and almost all have a verification script in Python. There is also a global verification script next to this DESCRIPTION file, which can be run in Matlab after running all validation cases in this directory.
+
+The mesh dependency checks the rate of convergence using a dielectric-dielectric interFoamEHD simulation on multiple resolutions.

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rm -rf processor?
+
+for i in AFLayer oilEgg Wall; 
+do 
+    decomposePar -region $i > log.decomposePar.$i 2>&1; 
+done

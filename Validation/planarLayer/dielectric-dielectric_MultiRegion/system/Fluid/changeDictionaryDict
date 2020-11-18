@@ -1,0 +1,149 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dictionaryReplacement
+{
+    boundary
+    {
+        leftAndRight
+        {
+            type            patch;
+        }
+        upWall
+        {
+            type            patch;
+        }
+        frontAndBack
+        {
+            type            empty;
+        }
+    }
+
+    Ue
+    {
+        internalField   uniform 0;
+
+        boundaryField
+        {
+            ".*"
+            {
+                type            zeroGradient;
+            }
+            upWall
+            {
+                type            fixedValue;
+                value           uniform 1;
+            }
+            frontAndBack
+            {
+                type            empty;
+            }
+            "Fluid_to_.*"
+            {
+                type                solidWallMixedTemperatureCoupled;
+                value               uniform 0;
+                neighbourFieldName  Ue;
+                K                   eps;
+            }
+        }
+    }
+    
+    rhoE
+    {
+        internalField   uniform 0;
+
+        boundaryField
+        {
+            ".*"
+            {
+                type            zeroGradient;
+            }
+            frontAndBack
+            {
+                type            empty;
+            }
+        }
+    }
+    
+    alpha1
+    {
+        internalField   uniform 0;
+
+        boundaryField
+        {
+            ".*"
+            {
+                type            zeroGradient;
+            }
+            frontAndBack
+            {
+                type            empty;
+            }
+/*            "oilEgg_to_Wall"
+            {
+                type                constantAlphaContactAngle;
+                theta0              60;
+                limit               gradient;
+                value               uniform 0;
+            }
+*/
+        }
+    }
+   
+      
+    p_rgh
+    {
+        internalField   uniform 0;
+
+        boundaryField
+        {
+            ".*"
+            {
+                type            zeroGradient;
+            }
+            frontAndBack
+            {
+                type            empty;
+            }
+/*            "oilEgg_to_.*"
+            {
+                type            fixedFluxPressure;
+                adjoint         no;
+            }
+*/
+        }
+    }
+    
+    U
+    {
+        internalField   uniform (0 0 0);
+
+        boundaryField
+        {
+            ".*"
+            {
+                type            fixedValue;
+                value           uniform (0 0 0);
+            }
+            frontAndBack
+            {
+                type            empty;
+            }
+        }
+    }
+}
+
+// ************************************************************************* //

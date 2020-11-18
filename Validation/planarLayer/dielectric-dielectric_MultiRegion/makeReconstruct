@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for i in AFLayer oilEgg Wall; 
+do 
+    reconstructPar -latestTime -region $i > log.reconstructPar.$i 2>&1;
+done
