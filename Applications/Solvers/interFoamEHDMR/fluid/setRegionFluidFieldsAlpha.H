@@ -1,0 +1,16 @@
+    const fvMesh& mesh = fluidRegions[i];
+    volScalarField& rho = rhoFluid[i];
+    surfaceScalarField& phi = phiFluid[i];
+    surfaceScalarField& rhoPhi = rhoPhiFluid[i];
+    volScalarField& alpha1 = alpha1Fluid[i];
+    twoPhaseMixture& twoPhaseProperties = twoPhasePropertiesFluid[i];
+    dimensionedScalar& rho1 = rho1Fluid[i];
+    pimpleControl& pimple = pimpleFluid[i];
+    dimensionedScalar& rho2 = rho2Fluid[i];
+    interfaceProperties& interface = interfaceFluid[i];
+    dimensionedScalar& sgm1 = sgm1Fluid[i];
+    dimensionedScalar& sgm2 = sgm2Fluid[i];
+    dimensionedScalar& eps1 = eps1Fluid[i];
+    dimensionedScalar& eps2 = eps2Fluid[i];
+    volScalarField& eps = epsFluid[i];
+    volScalarField& sgm = sgmFluid[i];

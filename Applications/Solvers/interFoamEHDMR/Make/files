@@ -1,0 +1,12 @@
+regionProperties/regionProperties.C
+
+derivedFvPatchFields/solidWallHeatFluxTemperature/solidWallHeatFluxTemperatureFvPatchScalarField.C
+derivedFvPatchFields/solidWallMixedTemperatureCoupled/solidWallMixedTemperatureCoupledFvPatchScalarField.C
+
+fluid/icoCourantNo.C
+fluid/alphaLocalRegionCourantNo.C
+
+multiRegionInterEHDFoam.C
+
+EXE = $(FOAM_USER_APPBIN)/interFoamEHDMR
+

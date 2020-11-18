@@ -1,0 +1,20 @@
+    const fvMesh& mesh = fluidRegions[i];
+    volScalarField& rho = rhoFluid[i];
+    volScalarField& Ue = UeFluid[i];
+    volTensorField& MST = MSTFluid[i];
+    volVectorField& U = UFluid[i];
+    surfaceScalarField& phi = phiFluid[i];
+    incompressible::turbulenceModel& turbulence = turbulenceFluid[i];
+    volScalarField& p = pFluid[i];
+    pimpleControl& pimple = pimpleFluid[i];
+    surfaceScalarField& rhoPhi = rhoPhiFluid[i];
+    volScalarField& alpha1 = alpha1Fluid[i];
+    interfaceProperties& interface = interfaceFluid[i];
+    twoPhaseMixture& twoPhaseProperties = twoPhasePropertiesFluid[i];
+    volScalarField& p_rgh = p_rghFluid[i];
+    surfaceScalarField& ghf = ghfFluid[i];
+    label& pRefCell = pRefCellFluid[i];
+    scalar& pRefValue = pRefValueFluid[i];
+    volScalarField& gh = ghFluid[i];
+    volScalarField& eps = epsFluid[i];
+
